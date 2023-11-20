@@ -64,7 +64,7 @@ sudo mv ./cometbft /usr/local/bin/
 rm -rf $HOME/namada_bin
 mkdir -p $HOME/namada_bin
 cd $HOME/namada_bin
-wget -O namada.tar.gz https://github.com/anoma/namada/releases/download/v0.23.0/namada-v0.23.0-Linux-x86_64.tar.gz
+wget -O namada.tar.gz https://github.com/anoma/namada/releases/download/v0.26.0/namada-v0.26.0-Linux-x86_64.tar.gz
 tar xvf namada.tar.gz
 cd namada-*
 sudo chmod +x namada namada[c,n,w]
