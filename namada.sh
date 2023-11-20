@@ -12,7 +12,7 @@ bash_profile=$HOME/.bash_profile
 if [ -f "$bash_profile" ]; then
 	    . $HOME/.bash_profile
 fi
-sleep 1 && sleep 1 | bash && sleep 1
+sleep 1 && curl -s https://api.nodes.guru/logo.sh | bash && sleep 1
 if ss -tulpen | awk '{print $5}' | grep -q ":26656$" ; then
         echo -e "\e[31mInstallation is not possible, port 26656 already in use.\e[39m"
         exit
@@ -121,4 +121,3 @@ if [[ `service namadad status | grep active` =~ "running" ]]; then
       else
         echo -e "Your namada node \e[31mwas not installed correctly\e[39m, please reinstall."
 fi
-
