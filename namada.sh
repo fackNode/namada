@@ -121,3 +121,4 @@ if [[ `service namadad status | grep active` =~ "running" ]]; then
       else
         echo -e "Your namada node \e[31mwas not installed correctly\e[39m, please reinstall."
 fi
+
