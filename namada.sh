@@ -19,6 +19,8 @@ if ss -tulpen | awk '{print $5}' | grep -q ":26656$" ; then
 else
         echo ""
 fi
+#NAMADA_TAG="v0.15.4"
+#TM_HASH="v0.1.4-abciplus"
 NAMADA_CHAIN_ID="public-testnet-14.5d79b6958580"
 rm -rf $HOME/.masp-params
 
@@ -62,13 +64,25 @@ sudo mv ./cometbft /usr/local/bin/
 rm -rf $HOME/namada_bin
 mkdir -p $HOME/namada_bin
 cd $HOME/namada_bin
-wget -O namada.tar.gz https://github.com/anoma/namada/releases/download/v0.26.0/namada-v0.26.0-Linux-x86_64.tar.gz
+wget -O namada.tar.gz https://github.com/anoma/namada/releases/download/v0.23.0/namada-v0.23.0-Linux-x86_64.tar.gz
 tar xvf namada.tar.gz
 cd namada-*
 sudo chmod +x namada namada[c,n,w]
 sudo mv namada /usr/local/bin/
 sudo mv namada[c,n,w] /usr/local/bin/
+#git clone https://github.com/anoma/namada 
+#cd namada 
+#git checkout $NAMADA_TAG
+#make build-release
+#sudo mv target/release/namada /usr/local/bin/
+#sudo mv target/release/namada[c,n,w] /usr/local/bin/
 
+#cd $HOME && sudo rm -rf tendermint 
+#git clone https://github.com/heliaxdev/tendermint 
+#cd tendermint 
+#git checkout $TM_HASH
+#make build
+#sudo mv build/tendermint /usr/local/bin/
 cd $HOME
 namada client utils join-network --chain-id $NAMADA_CHAIN_ID
 sleep 3
@@ -107,3 +121,4 @@ if [[ `service namadad status | grep active` =~ "running" ]]; then
       else
         echo -e "Your namada node \e[31mwas not installed correctly\e[39m, please reinstall."
 fi
+
