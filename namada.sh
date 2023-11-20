@@ -1,23 +1,23 @@
 #!/bin/bash
 exists()
 {
-	  command -v "$1" >/dev/null 2>&1
-  }
+    command -v "$1" >/dev/null 2>&1
+}
 if exists curl; then
-	echo ''
+    echo ''
 else
-	  sudo apt update && sudo apt install curl -y < "/dev/null"
+    sudo apt update && sudo apt install curl -y < "/dev/null"
 fi
 bash_profile=$HOME/.bash_profile
 if [ -f "$bash_profile" ]; then
-	    . $HOME/.bash_profile
+    . $HOME/.bash_profile
 fi
 sleep 1 && curl -s https://api.nodes.guru/logo.sh | bash && sleep 1
 if ss -tulpen | awk '{print $5}' | grep -q ":26656$" ; then
-        echo -e "\e[31mInstallation is not possible, port 26656 already in use.\e[39m"
-        exit
+    echo -e "\e[31mInstallation is not possible, port 26656 already in use.\e[39m"
+    exit
 else
-        echo ""
+    echo ""
 fi
 #NAMADA_TAG="v0.15.4"
 #TM_HASH="v0.1.4-abciplus"
@@ -25,8 +25,8 @@ NAMADA_CHAIN_ID="public-testnet-14.5d79b6958580"
 rm -rf $HOME/.masp-params
 
 if [ ! $VALIDATOR_ALIAS ]; then
-	read -p "Enter validator name: " VALIDATOR_ALIAS
-	echo 'export VALIDATOR_ALIAS='\"${VALIDATOR_ALIAS}\" >> $HOME/.bash_profile
+    read -p "Enter validator name: " VALIDATOR_ALIAS
+    echo 'export VALIDATOR_ALIAS='\"${VALIDATOR_ALIAS}\" >> $HOME/.bash_profile
 fi
 echo -e 'Setting up swapfile...\n'
 curl -s https://api.nodes.guru/swap8.sh | bash
@@ -70,16 +70,16 @@ cd namada-*
 sudo chmod +x namada namada[c,n,w]
 sudo mv namada /usr/local/bin/
 sudo mv namada[c,n,w] /usr/local/bin/
-#git clone https://github.com/anoma/namada 
-#cd namada 
+#git clone https://github.com/anoma/namada
+#cd namada
 #git checkout $NAMADA_TAG
 #make build-release
 #sudo mv target/release/namada /usr/local/bin/
 #sudo mv target/release/namada[c,n,w] /usr/local/bin/
 
-#cd $HOME && sudo rm -rf tendermint 
-#git clone https://github.com/heliaxdev/tendermint 
-#cd tendermint 
+#cd $HOME && sudo rm -rf tendermint
+#git clone https://github.com/heliaxdev/tendermint
+#cd tendermint
 #git checkout $TM_HASH
 #make build
 #sudo mv build/tendermint /usr/local/bin/
@@ -115,10 +115,10 @@ sudo systemctl restart namadad
 
 echo -e '\n\e[42mCheck node status\e[0m\n' && sleep 1
 if [[ `service namadad status | grep active` =~ "running" ]]; then
-        echo -e "Your namada node \e[32minstalled and works\e[39m!"
-        echo -e "You can check node status by the command \e[7mservice namadad status\e[0m"
-        echo -e "Press \e[7mQ\e[0m for exit from status menu"
-      else
-        echo -e "Your namada node \e[31mwas not installed correctly\e[39m, please reinstall."
+    echo -e "Your namada node \e[32minstalled and works\e[39m!"
+    echo -e "You can check node status by the command \e[7mservice namadad status\e[0m"
+    echo -e "Press \e[7mQ\e[0m for exit from status menu"
+else
+    echo -e "Your namada node \e[31mwas not installed correctly\e[39m, please reinstall."
 fi
 
